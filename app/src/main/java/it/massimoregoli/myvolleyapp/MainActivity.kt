@@ -28,12 +28,12 @@ class MainActivity : ComponentActivity() {
             fun getLatest(text: MutableState<String>) {
 
 
-                val url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale-latest.json"
-                val url2 = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale.json"
+                var url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale-latest.json"
+                url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale.json"
                 val context = this
                 val latestQueue = Volley.newRequestQueue(context)
                 val stringRequest = StringRequest(Request.Method.GET,
-                    url2, {response ->
+                    url, {response ->
                         Log.w("LATEST", response)
                         text.value = response.substring(0..100)
                     },
