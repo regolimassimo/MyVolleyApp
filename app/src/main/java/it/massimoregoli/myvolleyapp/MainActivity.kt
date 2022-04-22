@@ -18,6 +18,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import it.massimoregoli.myvolleyapp.model.National
 import it.massimoregoli.myvolleyapp.ui.theme.MyVolleyAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,8 +29,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             @Composable
             fun getLatest(text: MutableState<String>) {
-
-
                 var url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale-latest.json"
                 url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale.json"
                 val context = this
@@ -35,7 +36,18 @@ class MainActivity : ComponentActivity() {
                 val stringRequest = StringRequest(Request.Method.GET,
                     url, {response ->
                         Log.w("LATEST", response)
-                        text.value = response.substring(0..100)
+
+                        val sType = object: TypeToken<List<National>>() {}.type
+                        val gson = Gson()
+                        val data = gson.fromJson<List<National>>(response, sType)
+
+
+
+                        text.value = data[0].data
+
+
+
+
                     },
                     {
                         Log.e("LATEST", it.message!!)
