@@ -1,6 +1,13 @@
 package it.massimoregoli.myvolleyapp.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class National(
+    @PrimaryKey
+    var id: Int,
     var data: String,
     var ricoverati_con_sintomi: Int,
     var terapia_intensiva: Int,
