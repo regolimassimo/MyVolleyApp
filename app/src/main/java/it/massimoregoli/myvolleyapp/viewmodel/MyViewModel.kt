@@ -31,7 +31,7 @@ class MyViewModel(application: Application): AndroidViewModel(application) {
 
     fun setDate(d: String) {
         date.value = d
-        if(date.value != null) {
+        if(data.value != null) {
             for (c in data.value!!) {
                 if (c.data.substring(0..9) == date.value) {
                     current.value = c
@@ -39,10 +39,6 @@ class MyViewModel(application: Application): AndroidViewModel(application) {
             }
         }
     }
-
-//    fun getDate(): LiveData<String> {
-//        return date
-//    }
 
     fun getData(): LiveData<List<National>> {
         return data
